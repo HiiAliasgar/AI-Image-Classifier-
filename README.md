@@ -4,7 +4,7 @@ A Streamlit application that classifies uploaded images using the MobileNetV2 mo
 
 ## Features
 
-- Upload an image through the Streamlit interface.
+- Upload a JPEG, PNG or WebP image (maximum 10 MB) through the Streamlit interface.
 - Preprocess images for the model input.
 - Run inference with MobileNetV2.
 - Display top predictions and their confidence scores.
@@ -29,7 +29,7 @@ A Streamlit application that classifies uploaded images using the MobileNetV2 mo
 ```bash
 git clone https://github.com/HiiAliasgar/AI-Image-Classifier-.git
 cd AI-Image-Classifier-
-pip install streamlit tensorflow opencv-python
+pip install streamlit tensorflow pillow
 streamlit run main.py
 ```
 
@@ -47,6 +47,6 @@ uv.lock
 
 ## Model scope
 
-MobileNetV2 is pretrained on ImageNet. Predictions are limited to the classes represented by that model and can be unreliable for images outside its training distribution. Confidence scores should not be interpreted as calibrated probabilities.
+MobileNetV2 is pretrained on ImageNet. Images are converted to RGB and normalized to the expected MobileNetV2 input range before inference. Predictions are limited to the classes represented by that model and can be unreliable for images outside its training distribution. Confidence scores should not be interpreted as calibrated probabilities.
 
 [Source code](https://github.com/HiiAliasgar/AI-Image-Classifier-)
