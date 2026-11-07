@@ -1,0 +1,30 @@
+name: Image utility tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: image-classifier-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install lightweight test dependencies
+        run: python -m pip install numpy pillow pytest
+      - name: Run image utility tests
+        run: python -m pytest -q
+      - name: Compile application
+        run: python -m compileall -q main.py image_utils.py
